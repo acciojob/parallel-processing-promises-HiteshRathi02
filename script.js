@@ -19,20 +19,20 @@ function downloadImage(url) {
 }
 
 function downloadImages() {
-  loading.style.display = "block";
-  errorDiv.innerText = "";
-  output.innerHTML = "";
+    output.innerHTML = "";
+    error.textContent = "";
+    loading.style.display = "block";
 
-  Promise.all(images.map((image) => downloadImage(image.url)))
-  .then((loadedImages) => {
-    output.innerHTML = loadedImages.map((img) => `<img src="${img.src}" />`).join("");
-  })
-  .catch((error) => {
-    errorDiv.innerText = error;
-  })
-  .finally(() => {
-    loading.style.display = "none";
-  });
-}
+    Promise.all(images.map(img => downloadImage(img.url)))
+      .then(imgElements => {
+        imgElements.forEach(img => output.appendChild(img));
+      })
+      .catch(err => {
+        errorDiv.textContent = err.message;
+      })
+      .finally(() => {
+        loading.style.display = "none";
+      });
+  }
 
 downloadImages();
