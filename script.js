@@ -1,3 +1,4 @@
+const button = document.getElementById("download-images-button");
 const output = document.getElementById("output");
 const loading = document.getElementById("loading");
 const errorDiv = document.getElementById("error");
@@ -37,4 +38,4 @@ function downloadImages() {
     });
 }
 
-downloadImages();
+button.addEventListener("click", downloadImages);
